@@ -27,9 +27,9 @@ export default async function DashboardPage(){
 
  return(
 
-  <div className="min-h-screen bg-gray-50">
+  <div className="min-h-screen bg-black text-white">
 
-   <div className="max-w-4xl mx-auto py-12 px-6">
+   <div className="max-w-5xl mx-auto py-12 px-6">
 
     <h1 className="text-3xl font-bold mb-6">
      Dashboard
@@ -38,13 +38,13 @@ export default async function DashboardPage(){
     <div className="flex gap-3 mb-10">
 
      <a href="/create-event">
-      <button className="bg-black text-white px-4 py-2 rounded-md">
+      <button className="bg-white text-black px-4 py-2 rounded-md hover:bg-gray-200 transition">
        Create Event
       </button>
      </a>
 
      <a href="/availability">
-      <button className="border px-4 py-2 rounded-md">
+      <button className="border border-gray-700 px-4 py-2 rounded-md hover:bg-gray-900 transition">
        Availability
       </button>
      </a>
@@ -64,22 +64,22 @@ export default async function DashboardPage(){
 
       <div
        key={event.id}
-       className="bg-white border rounded-lg p-5 flex justify-between items-center shadow-sm"
+       className="bg-gray-900 border border-gray-800 rounded-lg p-5 flex justify-between items-center hover:bg-gray-800 transition"
       >
 
        <div>
 
-        <p className="font-semibold">
+        <p className="font-semibold text-white">
          {event.title}
         </p>
 
-        <p className="text-sm text-gray-500">
+        <p className="text-sm text-gray-400">
          {event.duration} minutes
         </p>
 
         <a
          href={`/book/${event.slug}`}
-         className="text-blue-600 text-sm"
+         className="text-blue-400 text-sm"
         >
          /book/{event.slug}
         </a>
@@ -91,7 +91,7 @@ export default async function DashboardPage(){
 
         <a
          href={`/edit-event/${event.id}`}
-         className="text-gray-600 text-sm"
+         className="text-gray-300 text-sm hover:text-white"
         >
          Edit
         </a>
@@ -123,16 +123,16 @@ export default async function DashboardPage(){
 
        <div
         key={b.id}
-        className="bg-white border rounded-lg p-4 flex justify-between items-center shadow-sm"
+        className="bg-gray-900 border border-gray-800 rounded-lg p-4 flex justify-between items-center hover:bg-gray-800 transition"
        >
 
         <div>
 
-         <p className="font-semibold">
+         <p className="font-semibold text-white">
           {b.name}
          </p>
 
-         <p className="text-sm text-gray-500">
+         <p className="text-sm text-gray-400">
           {b.event.title}
          </p>
 
@@ -140,12 +140,12 @@ export default async function DashboardPage(){
 
         <div className="flex items-center gap-4">
 
-         <p className="text-sm text-gray-600">
+         <p className="text-sm text-gray-400">
           {date.toLocaleString()}
          </p>
 
          <form action={cancelBooking.bind(null,b.id)}>
-          <button className="text-red-500 text-sm">
+          <button className="text-red-400 text-sm hover:text-red-300">
            Cancel
           </button>
          </form>
@@ -177,22 +177,22 @@ export default async function DashboardPage(){
 
        <div
         key={b.id}
-        className="bg-white border rounded-lg p-4 flex justify-between items-center shadow-sm"
+        className="bg-gray-900 border border-gray-800 rounded-lg p-4 flex justify-between items-center hover:bg-gray-800 transition"
        >
 
         <div>
 
-         <p className="font-semibold">
+         <p className="font-semibold text-white">
           {b.name}
          </p>
 
-         <p className="text-sm text-gray-500">
+         <p className="text-sm text-gray-400">
           {b.event.title}
          </p>
 
         </div>
 
-        <p className="text-sm text-gray-600">
+        <p className="text-sm text-gray-400">
          {date.toLocaleString()}
         </p>
 
