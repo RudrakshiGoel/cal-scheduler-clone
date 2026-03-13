@@ -1,7 +1,6 @@
-# Cal.com Scheduling Platform Clone
+# Cal Scheduler Clone
 
-This project is a simplified scheduling platform inspired by Cal.com.  
-It allows users to create meeting event types, define availability, and let others book meetings through a public booking page.
+This project is a simplified scheduling platform inspired by Cal.com. It allows users to create meeting event types, define their availability, and allow others to book meetings through a public booking page.
 
 ---
 
@@ -11,7 +10,7 @@ Frontend
 - Next.js (App Router)
 - React
 - Tailwind CSS
-- React Day Picker (calendar component)
+- React Day Picker
 
 Backend
 - Next.js API Routes
@@ -26,8 +25,8 @@ Database
 
 1. Clone the repository
 
-git clone https://github.com/YOUR_USERNAME/calcom-scheduler-clone.git  
-cd calcom-scheduler-clone
+git clone https://github.com/RudrakshiGoel/cal-scheduler-clone.git  
+cd cal-scheduler-clone
 
 2. Install dependencies
 
@@ -47,7 +46,7 @@ npx prisma migrate dev
 
 npm run dev
 
-The application will start at:
+The application will run on:
 
 http://localhost:3000
 
