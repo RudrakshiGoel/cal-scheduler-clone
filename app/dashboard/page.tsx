@@ -38,7 +38,7 @@ export default async function DashboardPage(){
     <div className="flex gap-3 mb-10">
 
      <a href="/create-event">
-      <button className="bg-white text-black px-4 py-2 rounded-md hover:bg-gray-200 transition">
+      <button className="bg-black text-white px-4 py-2 rounded-md hover:bg-gray-200 transition">
        Create Event
       </button>
      </a>

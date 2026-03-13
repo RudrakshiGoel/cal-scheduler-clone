@@ -30,14 +30,14 @@ export default async function AvailabilityPage() {
 
      <div
       key={a.id}
-      className="bg-white border rounded-lg p-4 flex justify-between"
+      className="bg-black border rounded-lg p-4 flex justify-between"
      >
 
       <p className="font-medium">
        {days[a.day]}
       </p>
 
-      <p className="text-gray-600">
+      <p className="text-white-300">
        {a.startTime} — {a.endTime}
       </p>
 
