@@ -1,33 +1,35 @@
+import Link from "next/link"
+
 export default function HomePage() {
-  return (
-    <div className="min-h-screen bg-black text-white flex flex-col justify-center items-center">
 
-      <div className="text-center max-w-2xl px-6">
+ return (
 
-        <p className="text-5xl mb-6">
-          cal.com
-        </p>
+  <div className="min-h-screen bg-gray-100 flex items-center justify-center px-6">
 
-        <h1 className="text-5xl font-bold mb-6">
-          Simple scheduling for everyone
-        </h1>
+   <div className="text-center max-w-2xl">
 
-        <p className="text-gray-400 mb-10 text-lg">
-          Create booking links, share them, and let people schedule meetings instantly.
-        </p>
+    <h1 className="text-6xl font-bold text-black mb-6">
+     cal.com
+    </h1>
 
-        <a href="/dashboard">
-          <button className="bg-white text-black px-8 py-3 rounded-md text-lg font-medium hover:bg-gray-200 transition">
-            Open Dashboard
-          </button>
-        </a>
+    <h2 className="text-3xl font-semibold text-gray-800 mb-6">
+     Simple scheduling for everyone
+    </h2>
 
-      </div>
+    <p className="text-gray-600 text-lg mb-10">
+     Create booking links, share them, and let people schedule meetings instantly.
+    </p>
 
-      <div className="absolute bottom-6 text-gray-500 text-sm">
-        Built with Next.js
-      </div>
+    <Link href="/dashboard">
+     <button className="bg-black text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-800 transition">
+      Open Dashboard
+     </button>
+    </Link>
 
-    </div>
-  )
+   </div>
+
+  </div>
+
+ )
+
 }
