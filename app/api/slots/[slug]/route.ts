@@ -4,75 +4,111 @@ import { NextResponse } from "next/server"
 export async function GET(
  req: Request,
  context: { params: Promise<{ slug: string }> }
-) {
+){
 
  const { slug } = await context.params
 
  const event = await prisma.eventType.findUnique({
-  where: { slug }
+  where:{ slug }
  })
 
- if (!event) {
+ if(!event){
   return NextResponse.json([])
  }
 
- const availability = await prisma.availability.findMany()
-
- const bookings = await prisma.booking.findMany({
-  include: { event: true }
+ const availability = await prisma.availability.findMany({
+  orderBy:{ day:"asc" }
  })
 
- const slots: string[] = []
+ const bookings = await prisma.booking.findMany({
+  include:{ event:true }
+ })
 
- const now = new Date()
+ const BUFFER = 10
+ const slots:string[] = []
 
- for (let i = 0; i < 14; i++) {
+ const today = new Date()
 
-  const day = new Date()
-  day.setDate(now.getDate() + i)
+ for(let i=0;i<30;i++){
 
-  const dayNumber = day.getDay()
+  const date = new Date()
+  date.setDate(today.getDate()+i)
 
-  const dayAvailability = availability.find(a => a.day === dayNumber)
-  if (!dayAvailability) continue
+  const day = date.getDay()
 
-  const start = new Date(day)
-  const end = new Date(day)
+  const dayAvailability = availability.find(a=>a.day===day)
 
-  const [startHour, startMin] = dayAvailability.startTime.split(":")
-  const [endHour, endMin] = dayAvailability.endTime.split(":")
+  if(!dayAvailability) continue
 
-  start.setHours(Number(startHour), Number(startMin), 0, 0)
-  end.setHours(Number(endHour), Number(endMin), 0, 0)
+
+  const start = new Date(date)
+  const [sh,sm] = dayAvailability.startTime.split(":")
+  start.setHours(Number(sh),Number(sm),0,0)
+
+
+  const end = new Date(date)
+  const [eh,em] = dayAvailability.endTime.split(":")
+  end.setHours(Number(eh),Number(em),0,0)
+
 
   let current = new Date(start)
 
-  while (current < end) {
 
-   const slotStart = new Date(current).getTime()
-   const slotEnd = slotStart + event.duration * 60000
+  // adjust start time based on existing bookings
+  bookings.forEach(b=>{
 
-   // Skip past times
-   if (slotStart < now.getTime()) {
-    current.setMinutes(current.getMinutes() + 15)
-    continue
+   const bookedStart = new Date(b.date)
+
+   if(bookedStart.toDateString() !== date.toDateString()) return
+
+   const bookedEnd = new Date(bookedStart)
+   bookedEnd.setMinutes(
+    bookedEnd.getMinutes() +
+    b.event.duration +
+    BUFFER
+   )
+
+   if(current < bookedEnd && current >= bookedStart){
+    current = new Date(bookedEnd)
    }
 
-   const conflict = bookings.some(b => {
+  })
 
-    const existingStart = new Date(b.date).getTime()
-    const existingEnd =
-     existingStart + b.event.duration * 60000
 
-    return slotStart < existingEnd && slotEnd > existingStart
+  while(current < end){
+
+   const slotStart = new Date(current)
+
+   const slotEnd = new Date(slotStart)
+   slotEnd.setMinutes(slotEnd.getMinutes() + event.duration)
+
+   const overlap = bookings.some(b=>{
+
+    const bookedStart = new Date(b.date)
+
+    if(bookedStart.toDateString() !== date.toDateString()) return false
+
+    const bookedEnd = new Date(bookedStart)
+    bookedEnd.setMinutes(
+     bookedEnd.getMinutes() +
+     b.event.duration +
+     BUFFER
+    )
+
+    return (
+     slotStart < bookedEnd &&
+     slotEnd > bookedStart
+    )
 
    })
 
-   if (!conflict) {
-    slots.push(new Date(slotStart).toISOString())
+   if(!overlap && slotEnd <= end){
+    slots.push(slotStart.toISOString())
    }
 
-   current.setMinutes(current.getMinutes() + 15)
+   current.setMinutes(
+    current.getMinutes() + event.duration
+   )
 
   }
 
