@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma"
 import DashboardActions from "./dashboardActions"
-
+import { revalidatePath } from "next/cache"
 async function cancelBooking(id:number){
  "use server"
 
@@ -8,6 +8,9 @@ async function cancelBooking(id:number){
   await prisma.booking.delete({
    where:{ id }
   })
+
+  revalidatePath("/dashboard")
+
  }catch{}
 }
 

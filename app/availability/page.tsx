@@ -18,32 +18,36 @@ export default async function AvailabilityPage() {
 
  return(
 
-  <div className="max-w-3xl mx-auto p-10">
+  <div className="min-h-screen bg-black text-white">
 
-   <h1 className="text-3xl font-bold mb-8">
-    Availability
-   </h1>
+   <div className="max-w-3xl mx-auto p-10">
 
-   <div className="space-y-4">
+    <h1 className="text-3xl font-bold mb-8">
+     Availability
+    </h1>
 
-    {availability.map(a => (
+    <div className="space-y-4">
 
-     <div
-      key={a.id}
-      className="bg-black border rounded-lg p-4 flex justify-between"
-     >
+     {availability.map(a => (
 
-      <p className="font-medium">
-       {days[a.day]}
-      </p>
+      <div
+       key={a.id}
+       className="bg-gray-900 border border-gray-800 rounded-lg p-4 flex justify-between items-center hover:bg-gray-800 transition"
+      >
 
-      <p className="text-white-300">
-       {a.startTime} — {a.endTime}
-      </p>
+       <p className="font-medium text-white">
+        {days[a.day]}
+       </p>
 
-     </div>
+       <p className="text-gray-400">
+        {a.startTime} — {a.endTime}
+       </p>
 
-    ))}
+      </div>
+
+     ))}
+
+    </div>
 
    </div>
 
