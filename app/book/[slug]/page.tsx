@@ -78,33 +78,33 @@ export default function BookingPage() {
 
 
  if(!event){
-  return <p className="p-10 text-center">Event not found</p>
+  return <p className="p-10 text-center text-white">Event not found</p>
  }
 
 
  return (
 
-  <div className="min-h-screen flex items-center justify-center bg-gray-50">
+  <div className="min-h-screen flex items-center justify-center bg-black text-white px-6">
 
-   <div className="bg-white rounded-2xl shadow-lg p-10 w-[900px] flex gap-8">
+   <div className="bg-gray-900 border border-gray-800 rounded-2xl shadow-xl p-10 w-[900px] flex gap-8">
 
     {/* LEFT SIDE */}
 
-    <div className="w-1/2 pr-6 border-r">
+    <div className="w-1/2 pr-6 border-r border-gray-800">
 
      <h1 className="text-2xl font-semibold mb-4">
       {event.title}
      </h1>
 
-     <p className="text-gray-500 mb-6">
+     <p className="text-gray-400 mb-6">
       {event.description}
      </p>
 
-     <div className="flex items-center gap-2 text-gray-600 text-sm mb-2">
+     <div className="flex items-center gap-2 text-gray-400 text-sm mb-2">
       ⏱ {event.duration} minutes
      </div>
 
-     <div className="flex items-center gap-2 text-gray-600 text-sm">
+     <div className="flex items-center gap-2 text-gray-400 text-sm">
       📅 Select a time
      </div>
 
@@ -123,6 +123,7 @@ export default function BookingPage() {
       mode="single"
       selected={selectedDate}
       onSelect={setSelectedDate}
+      className="text-white"
      />
 
 
@@ -146,9 +147,9 @@ export default function BookingPage() {
           <button
            key={slot}
            onClick={()=>setSelectedSlot(slot)}
-           className={`w-full border rounded-md py-2 text-sm transition
-            hover:bg-gray-100
-            ${selectedSlot === slot ? "bg-black text-white border-black" : ""}
+           className={`w-full border border-gray-700 rounded-md py-2 text-sm transition
+            hover:bg-gray-800
+            ${selectedSlot === slot ? "bg-white text-black border-white" : ""}
            `}
           >
            {date.toLocaleTimeString([], {hour:"2-digit", minute:"2-digit"})}
@@ -170,7 +171,7 @@ export default function BookingPage() {
       <form onSubmit={handleSubmit} className="mt-6 space-y-3">
 
        <input
-        className="border rounded-md p-2 w-full"
+        className="border border-gray-700 bg-gray-800 rounded-md p-2 w-full text-white placeholder-gray-400"
         placeholder="Name"
         value={name}
         onChange={(e)=>setName(e.target.value)}
@@ -178,7 +179,7 @@ export default function BookingPage() {
        />
 
        <input
-        className="border rounded-md p-2 w-full"
+        className="border border-gray-700 bg-gray-800 rounded-md p-2 w-full text-white placeholder-gray-400"
         placeholder="Email"
         value={email}
         onChange={(e)=>setEmail(e.target.value)}
@@ -186,7 +187,7 @@ export default function BookingPage() {
        />
 
        <button
-        className="bg-black text-white w-full py-2 rounded-md hover:opacity-90"
+        className="bg-black text-white w-full py-2 rounded-md hover:bg-gray-200 transition"
        >
         Confirm Booking
        </button>
